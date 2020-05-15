@@ -4,10 +4,12 @@
 
 <div class="cards">
   <% @cocktails.each do |cocktail| %>
-    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://loremflickr.com/240/400/cocktail)">
-      <%# if article.photo.attached? %>
-      <%# <%= cl_image_tag "cocktail.photo.key", width: , height: , crop: :fill /:thumb, gravity: :face %>
-      <%= link_to cocktail.name, cocktail_path(cocktail.id) %>
-    </div>
+    <% if cocktail.photo.attached? %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path cocktail.photo.key, crop: :fill %>')">
+    <% else %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://loremflickr.com/240/400/cocktail)">
+    <% end %>
+        <%= link_to cocktail.name, cocktail_path(cocktail.id) %>
+      </div>
   <% end %>
 </div>
